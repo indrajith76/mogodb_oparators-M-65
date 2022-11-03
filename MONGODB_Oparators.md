@@ -177,3 +177,110 @@ Output:
     carrier: { name: 'Shipit', fee: 1 }
 }
 ```
+
+## Logical Operators ($ne)
+MongoDB logical operators can be used to filter data based on given conditions. These operators provide a way to combine multiple conditions. Each operator equates the given condition to a true or false value.
+|Operator|Description|
+|---|---|
+|$and|Joins query clauses with a logical AND returns all documents that match the conditions of both clauses.|
+|$not|Inverts the effect of a query expression and returns documents that do not match the query expression.|
+|$nor|The opposite of the OR operator. The logical NOR operator will join two or more queries and return documents that do not match the given query condition|
+|$or|Joins query clauses with a logical OR returns all documents that ma the conditions of either clause.|
+
+## Logical Operators ($and)
+### Syntax: { $and: [ { < expression1 > }, { < expression2 > }, ..., { < expressionN > } ] }
+```js
+Input:
+db.employees.find({ $and: [{"job_role": "Store Associate"}, {"emp_age": {$gte: 20, $lte: 30}}]}).pretty()
+```
+```js
+Output:
+> db.employees.find({ $and: [{"job_role": "Store Associate"}, {"emp_age": {$gte: 20, $lte: 30}}]}). pretty()
+{
+    "_id": 345342,
+    "emp_name": "Martin Garrix", 
+    "emp_age": 25, 
+    "job_role" : "Store Associate", 
+    "salary": 45000
+},
+{
+    "_id": 445634,
+    "emp_name": "Lucy Hale", 
+    "emp_age" : 22, "job_role" : 
+    "Store Associate", 
+    "salary": 35000
+}
+```
+
+## Logical Operators ($not)
+### Syntax: {field: { $not: { < operator-expression > }}}
+```js
+Input:
+db.employees.find({"emp_age": { $not: { $gte: 40}}})
+```
+```js
+Output:
+> db.employees.find({ "emp_age": { $not: { $gte: 40}}})
+{"_id": 312456, "emp_name": "Barry Stevens", "emp_age" : 28, "job_role" : "Store Manager", "sala ry": 120000},
+{"_id": 345342, "emp_name": "Martin Garrix", "emp_age" : 25, "job_role" : "Store Associate", "sa lary" : 45000},
+{"id": 334566, "emp_name": "Linda Harris", "emp_age" : 35, "job_role" : "Cashier", "salary": 6 7500},
+{"_id": 445634, "emp_name": "Lucy Hale", "emp_age": 22, "job_role" : "Store Associate", "salary": 35000}
+```
+
+## Logical Operators ($nor)
+### Syntax: { $nor: [{ < expression1 > }, { < expression2 > }, ... { < expressionN > } ] }
+```js
+Input:
+db.employees.find({ $nor: [{"job_role": "Senior Cashier"}, {"job_role": "Store Manager"}]}).pretty()
+```
+```js
+Output:
+> db.employees.find({ $nor: [{"job_role":
+"Senior Cashier"}, {"job_role":"Store Manager"}]}).pretty()
+{
+    "id": 345342,
+    "emp_name":"Martin Garrix",
+    "emp_age": 25,
+    "job_role" : "Store Associate", 
+    "salary": 45000
+},
+{
+    "id": 334566,
+    "emp_name": "Linda Harris", 
+    "emp_age": 35,
+    "job_role" : "Cashier", 
+    "salary" : 67500
+},
+{
+    "id": 445634,
+    "emp_name":"Lucy Hale",
+    "emp_age":22,
+    "job_role": "store Associate", 
+    "salary": 35000
+}
+```
+
+## Logical Operators ($or)
+### Syntax: { $or; [ { < expression1 > }, { < expression2 > }, ..., { < expressionN >}]}
+```js
+Input:
+db.employees.find({ $or: [{"job_role": "Senior Cashier"}, {"job_role": "Store Manager"}]}).pretty()
+```
+```js
+Output:
+db.employees.find({ $or: [{"job_role": "Senior Cashier"}, {"job_role": "Store Manager"}]}).pretty()
+{
+    "id": 312456,
+    "emp_name": "Barry Stevens", 
+    "job_role" : "Store Manager",
+    "emp_age": 28,
+    "salary": 120000
+},
+{
+    "id": 245345,
+    "emp_name": "Maggie Smith", 
+    "emp_age": 40, 
+    "job role" : "Senior Cashier",
+    "salary": 72500,
+}
+```
