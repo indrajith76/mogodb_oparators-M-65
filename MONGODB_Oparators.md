@@ -27,14 +27,15 @@ MongoDB comparison operators can be used to compare values in a document. The fo
 
 <hr>
 
-### Comparison Operators ($eq) :
-In this example, we retrieve the document with the exact qty value 20.
-> Syntax: {field: ($eq: value}}
+## Comparison Operators ($eq) :
+In this example, we retrieve the document with the exact qty value 20.<br>
+### Syntax: {field: ($eq: value}}
 
 ```js
 Input:
 db.inventory.find({ qty: { $eq: 20 } })
 ```
+
 <br>
 
 ```js
@@ -43,3 +44,27 @@ Output:
 {_id: 5, item: { name: "mn", code: "000" }, qty: 20, tags: ["A"], "B" 1, "C" 1 }
 
 ```
+
+## Comparison Operators ($gt):
+In this example, we retrieve the documents where the quantity is greater than 20.
+### Syntax: {field: {$gt: value}}
+```js
+Input:
+db.inventory.find({ quantity: {$gt: 20 } })
+```
+```js
+Output:
+{
+    _id: ObjectId("61ba25cbfe687fce2f842414"), 
+    item: 'nuts', 
+    quantity: 30, 
+    carrier: { name: 'Shipit', fee: 3 }
+},
+{
+    _id: ObjectId("61ba25cbfe687fce2f842415"), 
+    item: 'bolts', 
+    quantity: 50, 
+    carrier: { name: 'Shipit', fee: 4 } 
+} 
+```
+
