@@ -68,3 +68,23 @@ Output:
 } 
 ```
 
+## Comparison Operators ($gte):
+In this example, we retrieve the documents where the quantity is greater than or equal to 20.<br>
+### Syntax: {field: {$gte: value}}
+```js
+Input:
+db.inventory.find({ quantity: {$gte: 20 } })
+```
+
+```js
+{
+    _id: ObjectId("61bb51211b83c864e3bbe037"), item: 'nuts', 
+    quantity: 30, 
+    carrier: { name: 'Shipit', fee: 3 }
+},
+{
+    _id: ObjectId("61bb51211b83c864e3bbe038"), item: 'bolts',
+    quantity: 20, 
+    carrier: { name: 'Shipit', fee: 4 } 
+}
+```
