@@ -25,15 +25,21 @@ MongoDB comparison operators can be used to compare values in a document. The fo
 |$ne|Matches values that are not equal to the given value.|
 |$nin|Matches none of the values specified in an array.|
 
-### Comparison Operators ($eq)
+<hr>
+
+### Comparison Operators ($eq) :
 In this example, we retrieve the document with the exact qty value 20.
 > Syntax: {field: ($eq: value}}
 
 ```js
 Input:
-db.inventory.find({ qty: { $eq: 20 } })```
+db.inventory.find({ qty: { $eq: 20 } })
+```
+<br>
 
 ```js
 Output:
-fid: 2, item: { name: "cd", code: "123" }, qty: 28, tags: [ "B" ] } (id: 5, item: { name: "mn", code: "000" }, qty: 20, tags: II "A", "B" 1, "C" 1 }
+{_id: 2, item: { name: "cd", code: "123" }, qty: 28, tags: [ "B" ] } 
+{_id: 5, item: { name: "mn", code: "000" }, qty: 20, tags: ["A"], "B" 1, "C" 1 }
+
 ```
