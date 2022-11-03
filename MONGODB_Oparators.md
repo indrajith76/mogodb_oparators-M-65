@@ -88,3 +88,92 @@ db.inventory.find({ quantity: {$gte: 20 } })
     carrier: { name: 'Shipit', fee: 4 } 
 }
 ```
+
+## Comparison Operators ($It):
+In this example, we retrieve the documents where the quantity is less than 20.<br>
+### Syntax: {field: {$lt: value}}
+```js
+Input:
+db.inventory.find({ quantity: { $lt: 20 } })
+```
+```js
+Output:
+{
+    id: ObjectId("61ba634dfe687fce2f04241f"), item: 'washer',
+    quantity: 10,
+    carrier: { name: 'Shipit', fee: 1 }
+}
+```
+
+## Comparison Operators ($Ite):
+In this example, we retrieve the documents where the quantity is less than or equal to 20.<br>
+### Syntax: {field: {$lte: value}}
+```js
+Input:
+db.inventory.find( { quantity: { $lte: 20 } })
+```
+```js
+Output:
+{
+    id: ObjectId("61ba453ffe687fce2f04241b"), item: 'bolts', 
+    quantity: 20, 
+    carrier: { name: 'Shipit', fee: 1 }
+}
+{
+    _id: ObjectId("olba453ffe687fce2f04241c"), item: 'washers', 
+    quantity: 10, 
+    carrier: { name: 'Shipit', fee: 4 }
+}
+```
+
+## Comparison Operators ($in):
+In this example, we retrieve the documents where the quantity contains the given values.<br>
+### Syntax: field: { $in: [< value >, < value2 >, ... < valueN > ] } }
+```js
+Input:
+db.inventory.find({ quantity: { $in: [ 5, 15 ] } }, { id: 0 })
+```
+```js
+Output:
+{ item: 'Erasers', quantity: 15, tags: [ 'school', 'home' ] }, 
+{ item: 'Books', quantity: 5, tags: [ 'school', 'storage', 'home' ] }
+```
+
+## Comparison Operators ($nin)
+In this example, we retrieve the documents where the quantity do not contain the given values.<br>
+### Syntax: field: { $nin: [ < value >, < value2 > ... < valueN > ] } }
+```js
+Input:
+db.inventory.find( {quantity: { $nin: [ 5, 15 ] } }, { id: @})
+```
+```js
+Output:
+{ item: 'Pens', quantity: 350, tags: ['school', 'office'] }, 
+{ item: 'Maps', tags: ['office', 'storage' ]}
+```
+
+## Comparison Operators ($ne)
+In this example, we retrieve the documents where the quantity is not equal to the given values.<br>
+### Syntax: { field: { $ne: value } }
+```js
+Input:
+db.inventory.find({ quantity: { $ne: 20 } })
+```
+```js
+Output:
+{
+    _id: ObjectId("61ba667dfe687fce2f042420"), item: 'nuts', 
+    quantity: 30, 
+    carrier: { name: 'Shipit', fee: 3 }
+},
+{
+    _id: ObjectId("61ba667dfe687fce2f042421"), item: 'bolts', 
+    quantity: 58, 
+    carrier: { name: 'Shipit', fee: 4 }
+},
+{
+    _id: ObjectId("61ba667dfe687fce2f042422"), item: 'washers', 
+    quantity: 10, 
+    carrier: { name: 'Shipit', fee: 1 }
+}
+```
